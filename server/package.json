@@ -1,0 +1,19 @@
+{
+  "name": "NAGIBATOR1488",
+  "version": "1.0.0",
+  "scripts": {
+    "server": "SET NODE_ENV=development&& nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.2",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.4.11",
+    "uglifyjs-webpack-plugin": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.18.4"
+  }
+}

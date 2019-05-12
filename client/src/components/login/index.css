@@ -1,0 +1,102 @@
+.back-image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    background-size: 100%;
+}
+
+.back-frm-login{
+    position: absolute;
+    top: 0%;
+    left: 10%;
+    width: 20%;
+    height: 100%;
+    background: rgba(65, 65, 65, 0.85);
+}
+
+.input-group{
+    position: relative;
+    top: 50%;
+}
+
+.width30{
+    width: 47px;
+    left: 5%;
+    position: relative;
+    margin-right: 5%;
+
+
+}
+
+.width70{
+    width: 70%;
+    position: relative;
+    left: 5%;
+}
+
+.display-inline-block{
+    display: inline-block;
+}
+
+.opacity-0-5{
+    opacity: 0.5;
+}
+
+.lock-img-fix{
+    height: 47px;
+    width: 47px;
+}
+
+.buttons-block{
+    position: relative;
+    width: 100%;
+    margin-top: 7%;
+}
+
+.btn-forgot{
+    background: none;
+    border: none;
+    color: #ffffff;
+    position: relative;
+    height: 5vh;
+    padding: 0;
+    margin-left: 1.4vw;
+    width: 50%;
+    outline: none!important;
+}
+
+.btn-forgot:hover{
+    color: #ff9b2f;
+}
+
+.btn-forgot:active{
+    color: #c06b32
+}
+
+.btn-login{
+    background-color: #bc5600;
+    outline: none!important;
+    color: #ffffff;
+    float: right;
+    right: 8%;
+    position: relative;
+    height: 4.5vh;
+    padding: 0;
+    width: 6vw;
+    border: 1px #000000;
+    border-radius: 3px;
+    margin-left: 2.45vw;
+    opacity: 1;
+}
+
+.btn-login:hover{
+    background-color: #e65700;
+}
+
+.btn-login:active{
+    background-color: #9a5200;
+}
