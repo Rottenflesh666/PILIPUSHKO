@@ -1,0 +1,55 @@
+.checkBox{
+    position: absolute;
+    right: 1%;
+    width: 26px;
+    height: 21px;
+}
+
+.tasksListBody{
+    position: absolute;
+    width: 40%;
+    height: 75%;
+    border-top: 2px solid rgba(65, 65, 65, 0.85);
+    border-right: 2px solid rgba(65, 65, 65, 0.85);
+    border-bottom: 2px solid rgba(65, 65, 65, 0.85);
+}
+
+.textAreaCreator{
+    position: absolute;
+    height: 70%;
+    width: 100%;
+    left: 0%;
+}
+
+.area-input-header{
+    background-color: #ff8108;
+    font-weight: bold;
+}
+
+.area-input {
+    font-size: 2vh;
+    min-height: 50px;
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    left: 5%;
+    max-height: 30vh;
+}
+
+.area-input:focus {
+    outline: none !important;
+    border:1px solid rgb(253, 163, 0);
+    box-shadow: 0 0 10px #C98000;
+}
+
+.question-area{
+    max-height: 100%;
+}
+
+.msgCreator{
+    max-height: 40vh;
+}
+
+.width120{
+    width: 120%;
+}

@@ -1,6 +1,5 @@
 client/.idea/**/*
 server/.idea/**/*
-client/build/**/*
 server/client/**/*
 .idea/**/*
 

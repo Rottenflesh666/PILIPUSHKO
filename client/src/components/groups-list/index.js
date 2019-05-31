@@ -1,25 +1,24 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
 import {ListGroup, ListGroupItem} from 'reactstrap';
-import back from '../../images/notepad_coffe.jpg';
 import decode from "jwt-decode";
 import {observable} from "mobx";
 import './index.css';
 
-@inject("testsStore")
+@inject("groupsStore")
 @observer
 
-export default class TestsList extends React.Component {
+export default class GroupsList extends React.Component {
 
   @observable
   compState = {
     selected: null,
-    selectedTestID: null,
-    selectedUserName: null
+    selectedGroupID: null,
+    selectedGroupName: null
   };
 
   componentWillMount = () => {
-    fetch('/api/tests', {
+    fetch('/api/groups', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -34,36 +33,35 @@ export default class TestsList extends React.Component {
         }
       })
       .then((response) => {
-        this.props.testsStore.setData(response.testsList);
+        this.props.groupsStore.setData(response.groupsList);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  onClickListItemHandle(test, selectedIndex) {
+  onClickListItemHandle(group, selectedIndex) {
     this.compState = ({
       selected: selectedIndex,
-      selectedTestID: test.id,
-      selectedTestName: test.name
+      selectedGroupID: group.id,
+      selectedGroupName: group.name,
     });
   }
 
-  openTestHandler() {
-    localStorage.setItem('testId', this.compState.selectedTestID);
+  openGroupHandler() {
+    localStorage.setItem('groupId', this.compState.selectedGroupID);
     this.props.history.push('/tests/tasks');
   }
 
-  showTestsList() {
-    if (this.props.testsStore.testsList.length > 0) {
+  showGroupsList() {
+    if (this.props.groupsStore.groupsList.length > 0) {
       return (
         <ListGroup className="list">
-          {this.props.testsStore.getData.map((test, index) => (
-            /*list-item-user*/
+          {this.props.groupsStore.getData.map((test, index) => (
             <ListGroupItem className="list-item  list-group-item.active  text-left" tag="button"
                            active={this.compState.selected === index}
                            onClick={() => this.onClickListItemHandle(test, index)}
-                           onDoubleClick={() => this.openTestHandler()}>
+                           onDoubleClick={() => this.openGroupHandler()}>
               {test.name}
             </ListGroupItem>
           ))}
@@ -81,16 +79,13 @@ export default class TestsList extends React.Component {
   render() {
     return (
       <div>
-        <img src={back} className="back-image"/>
         <div className="task-back-body">
           <div className="header">
             <div className="header-text">
-              Список тестов:
+              Список групп:
             </div>
           </div>
-          <div className="bodyList">
-            {this.showTestsList()}
-          </div>
+          {this.showGroupsList()}
         </div>
       </div>
     )

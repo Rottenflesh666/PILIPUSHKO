@@ -1,0 +1,99 @@
+.task-back-body{
+    position: absolute;
+    max-width: 1058px;
+    min-width: 680px;
+    left: 20%;
+    right: 20%;
+    top: 20%;
+    width: 60%;
+    height: 60%;
+    border: 2px solid rgba(65, 65, 65, 0.85);
+    background: rgb(236, 236, 236);
+}
+
+.bottomBar-body{
+    height: 15%;
+    background: rgba(65, 65, 65, 0.85);
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    display: inline-block;
+}
+
+.display-inline{
+    display: inline;
+    width: 150px;
+}
+
+.button-left{
+    position: absolute;
+    left: 2%;
+}
+
+.button-right{
+    position: absolute;
+    right: 2%;
+}
+
+.button{
+    background-color: rgb(255, 129, 0) !important;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.button:active{
+    background-color: rgb(165, 96, 0) !important;
+}
+
+.button:hover{
+    background-color: rgb(253, 163, 0) ;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 3px 3px 3px;
+    background: rgba(65, 65, 65, 1)!important;
+}
+
+.h-45px {
+    height: 45px;
+}
+
+.message-input {
+    position: absolute;
+    font-size: 3vh;
+    min-height: 50px;
+    grid-column: 1;
+    grid-row: 1;
+    width: 90%;
+    left: 5%;
+    max-height: 30vh;
+}
+
+.message-input:focus {
+    outline: none !important;
+    border:1px solid rgb(253, 163, 0);
+    box-shadow: 0 0 10px #C98000;
+}
+
+
+.message-form {
+    width: 100%;
+}
+
+.body-with-headFooter {
+    width: 100%;
+    height: 30%;
+    overflow-y: auto;
+    margin-bottom: 4%;
+}
+
+.header-text{
+    position: absolute;
+    left: 2%;
+    font-size: 3vh;
+    top:1%;
+    width: 90%;
+}

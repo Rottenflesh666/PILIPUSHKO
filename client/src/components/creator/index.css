@@ -1,0 +1,30 @@
+.checkBox{
+    position: absolute;
+    right: 1%;
+    width: 26px;
+    height: 21px;
+}
+
+.tasksListBody{
+    position: absolute;
+    width: 40%;
+    height: 75%;
+    border-top: 2px solid rgba(65, 65, 65, 0.85);
+    border-right: 2px solid rgba(65, 65, 65, 0.85);
+    border-bottom: 2px solid rgba(65, 65, 65, 0.85);
+}
+
+.textAreaCreator1{
+    position: absolute;
+    height: 70%;
+    width: 60%;
+    left: 40%;
+}
+
+.msgCreator{
+    max-height: 40vh;
+}
+
+.width120{
+    width: 120%;
+}
