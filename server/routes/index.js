@@ -5,4 +5,5 @@ module.exports = (app) => {
   require('./groups')(app);
   require('./newQuestion')(app);
   require('./admin')(app);
+  require('./tasks')(app);
 };

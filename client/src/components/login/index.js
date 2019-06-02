@@ -15,7 +15,7 @@ export default class login extends React.Component {
   componentWillMount = () => {
     let accessMode = localStorage.getItem('accessMode');
     if (accessMode !== null) {
-      accessMode === '0' ? this.props.history.push('/tests') : this.props.history.push('/admin');
+      accessMode === '0' ? this.props.history.push('/tests') : this.props.history.push('/admin/groups');
     }
   };
 
@@ -42,12 +42,14 @@ export default class login extends React.Component {
       })
       .then((response) => {
         if (response.accessMode === 0) {
+          localStorage.setItem('fullName',response.fullName);
           localStorage.setItem('accessMode', '0');
           this.props.history.push('/tests');
         }
         if(response.accessMode === 1) {
+          localStorage.setItem('fullName',response.fullName);
           localStorage.setItem('accessMode', '1');
-          this.props.history.push('/admin');
+          this.props.history.push('/admin/groups');
         }
       })
       .catch((err) => {

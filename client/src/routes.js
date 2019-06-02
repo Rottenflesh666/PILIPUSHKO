@@ -9,14 +9,16 @@ import GroupsList from  './components/groups-list';
 import Admin from './components/admin';
 import Creator from './components/creator'
 import NewQuestion from './components/newQuestion';
+import HeaderNavigator from './components/headerNavigator';
 
 //'/tests/tasks'
 const Routes = () => (
   <div>
     <div className="indentTop">
+      <HeaderNavigator/>
       <Switch>
         <Route path='/login' component={Login}/>
-        <Route path='/tests/tasks' component={Tasks}/>
+        <Route path='/tests/tasks' component={Tasks}/> {/*'/tests/tasks'*/}
         <Route path='/tests' component={TestsList}/>
         <Route path='/admin/groups' component={GroupsList}/>
         <Route path='/admin/creation' component={Creator}/> {/*admin/creation*/}

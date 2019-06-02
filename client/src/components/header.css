@@ -1,0 +1,59 @@
+.header-icon {
+    float: left !important;
+    margin-top: -4px !important;
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+    padding: 0;
+}
+
+.rotate-90{
+    transform: rotate(-90deg);
+}
+
+
+.header-shadow {
+    box-shadow: 0 2px 5px 0;
+}
+
+.header-navigator {
+    background-color: rgb(255, 129, 0);
+    height: 38px !important;
+
+}
+
+.menu-icon {
+    transition: color 0.5s ease;
+    color: rgb(255, 129, 0);
+}
+
+.menu-item {
+    border: 1px solid  black;
+    padding: 10px;
+    background-color: #ffffff;
+    margin-right: 0em;
+    color: black;
+    /*height: 6%;*/
+    font-size: 18px;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+}
+
+.burger{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.header-core{
+    background-color: rgb(255, 129, 0)!important;
+}
+
+.overlay{
+    background: rgba(0, 0, 0, 0)!important;
+}
+
+.labelFullName{
+    font-size: larger;
+}
