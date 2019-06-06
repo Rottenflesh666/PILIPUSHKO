@@ -87,7 +87,7 @@ export default class login extends React.Component {
                         fontSize: '22px',
                         height: '72px'
                       }}
-                      inputStyle={{color: '#828282'}}
+                      inputStyle={{color: '#FFFFFF'}}
                       onChange={this.props.loginStore.handleLoginChange}
                     />
                   </div>

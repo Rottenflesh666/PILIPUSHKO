@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Button} from 'reactstrap';
 import {TextArea} from 'semantic-ui-react';
 import {observable} from "mobx/lib/mobx";
+import back from '../../images/adminBack.jpg';
 import '../stateless-comp/input-login/index.css';
 import './index.css';
 
@@ -59,55 +60,58 @@ export default class NewQuestion extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <div className="task-back-body">
+      <div>
+        <img src={back} className="back-image"/>
+        <MuiThemeProvider>
+          <div>
+            <div className="task-back-body">
 
-            <div className="header">
-              <div className="header-text">
-                Добавление вопроса
-              </div>
-            </div>
-
-            <div>
-              <div className="card">
-                <div className="card-header area-input-header">
-                  Вопрос
+              <div className="header">
+                <div className="header-text">
+                  Добавление вопроса
                 </div>
-                <div className="card-body">
+              </div>
+
+              <div>
+                <div className="card">
+                  <div className="card-header area-input-header">
+                    Вопрос
+                  </div>
+                  <div className="card-body">
                 <TextArea className="area-input msgCreator" rows={1}
                           name="question"
                           value={this.newQuestion.question}
                           onChange={this.handleChange}
                           required/>
+                  </div>
                 </div>
-              </div>
 
-              <div className="card">
-                <div className="card-header area-input-header">
-                  Ответ
-                </div>
-                <div className="card-body">
+                <div className="card">
+                  <div className="card-header area-input-header">
+                    Ответ
+                  </div>
+                  <div className="card-body">
                <TextArea autoHeight className="area-input msgCreator" rows={1}
                          name="answer"
                          value={this.newQuestion.answer}
                          onChange={this.handleChange}
                          required/>
+                  </div>
+                </div>
+              </div>
+
+              <div className="footer bg-primary h-45px">
+                <div className="display-inline button-right ">
+                  <Button className="width100 h-100 button"
+                          disabled={this.newQuestion.dataEmpty}
+                          onClick={this.onNewQuestionHandler}> {'Добавить'}
+                  </Button>
                 </div>
               </div>
             </div>
-
-            <div className="footer bg-primary h-45px">
-              <div className="display-inline button-right ">
-                <Button className="width100 h-100 button"
-                        disabled={this.newQuestion.dataEmpty}
-                        onClick={this.onNewQuestionHandler}> {'Добавить'}
-                </Button>
-              </div>
-            </div>
           </div>
-        </div>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
+      </div>
     )
   }
 }

@@ -3,6 +3,7 @@ import {inject, observer} from 'mobx-react';
 import {ListGroup, ListGroupItem} from 'reactstrap';
 import decode from "jwt-decode";
 import {observable} from "mobx";
+import back from '../../images/adminBack.jpg';
 import './index.css';
 
 @inject("groupsStore")
@@ -18,7 +19,7 @@ export default class GroupsList extends React.Component {
   };
 
   componentWillMount = () => {
-    if(localStorage.getItem('groupId')) localStorage.removeItem('groupId');
+    if (localStorage.getItem('groupId')) localStorage.removeItem('groupId');
     fetch('/api/groups', {
       method: "POST",
       headers: {
@@ -80,13 +81,16 @@ export default class GroupsList extends React.Component {
   render() {
     return (
       <div>
-        <div className="task-back-body">
-          <div className="header">
-            <div className="header-text">
-              Список групп:
+        <img src={back} className="back-image"/>
+        <div>
+          <div className="task-back-body">
+            <div className="header">
+              <div className="header-text">
+                Список групп:
+              </div>
             </div>
+            {this.showGroupsList()}
           </div>
-          {this.showGroupsList()}
         </div>
       </div>
     )
