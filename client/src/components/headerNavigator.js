@@ -32,6 +32,7 @@ export default class HeaderNavigation extends React.Component {
   closeMenu(menuID) {
     if (menuID === 99) {
       localStorage.removeItem('accessMode');
+      localStorage.removeItem('userId');
     }
     this.menuOpen = false;
   }

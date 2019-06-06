@@ -1,0 +1,13 @@
+.list-group-item:active{
+    background-color: #ff9631 ;
+    color: #000000;
+    border-color: #ff9631;
+    outline-color: #000000;
+}
+
+.list-group-item:focus{
+    background-color: #ff9631 ;
+    color: #000000;
+    border-color: #ff9631;
+    outline-color: #000000;
+}

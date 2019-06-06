@@ -19,6 +19,9 @@ export default class TestsList extends React.Component {
   };
 
   componentWillMount = () => {
+    let iterator = localStorage.getItem('iterator');
+    if (iterator !== null) localStorage.removeItem('iterator');
+
     fetch('/api/tests', {
       method: "POST",
       headers: {

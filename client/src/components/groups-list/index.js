@@ -18,6 +18,7 @@ export default class GroupsList extends React.Component {
   };
 
   componentWillMount = () => {
+    if(localStorage.getItem('groupId')) localStorage.removeItem('groupId');
     fetch('/api/groups', {
       method: "POST",
       headers: {
@@ -50,7 +51,7 @@ export default class GroupsList extends React.Component {
 
   openGroupHandler() {
     localStorage.setItem('groupId', this.compState.selectedGroupID);
-    this.props.history.push('/tests/tasks');
+    this.props.history.push('/admin/groups/students');
   }
 
   showGroupsList() {

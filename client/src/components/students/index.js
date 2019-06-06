@@ -12,14 +12,20 @@ import './index.css';
 export default class Students extends React.Component {
 
   @observable students = [];
+  @observable result = '';
+  groupId = 0;
 
   componentWillMount = () => {
+    this.groupId = localStorage.getItem('groupId');
     fetch('/groups/students', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({
+        groupId: this.groupId,
+      })
     })
       .then((response) => {
         if (response.status === 200) {
@@ -41,20 +47,21 @@ export default class Students extends React.Component {
 
   };
 
-  onClickListItemHandle = (index) => {
-
-  };
-
-  handleTxtAreaChange = (e) => {
-
-  };
+  onClickListItemHandle(selectedIndex) {
+    this.compState = ({
+      selected: selectedIndex,
+      selectedTestID: test.id,
+      selectedTestName: test.name
+    });
+  }
 
   showTasksList = () => {
     if (this.students.length > 0) {
       return (
         <ListGroup className="list">
-          {this.students.map((students, index) => (
-            <ListGroupItem className="list-item  list-group-item.active  text-left" tag="button">
+          {this.students.map((student, index) => (
+            <ListGroupItem className="list-item  list-group-item.active  text-left" tag="button"
+                           onClick={() => this.onClickListItemHandle(student)}>
               {students.fullName}
             </ListGroupItem>
           ))}
@@ -78,9 +85,6 @@ export default class Students extends React.Component {
               <div className="header-text">
                 Список студентов:
               </div>
-              <div>
-                Результаты:
-              </div>
             </div>
             <div className="tasksListBody">
               {this.showTasksList()}
@@ -91,15 +95,7 @@ export default class Students extends React.Component {
                          required/>
             </div>
             <div className="footer bg-primary h-45px">
-              <div className="display-inline button-right ">
-                <Button className="width100 h-100 button"
-                        onClick={this.onCreateHandler}> {'Создать тест'}
-                </Button>
-              </div>
-              <div className="display-inline button-left ">
 
-
-              </div>
             </div>
           </div>
         </div>

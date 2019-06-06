@@ -7,6 +7,7 @@ import TestsList from './components/tests-list';
 import Tasks from './components/tasks';
 import GroupsList from  './components/groups-list';
 import Admin from './components/admin';
+import Students from './components/students';
 import Creator from './components/creator'
 import NewQuestion from './components/newQuestion';
 import HeaderNavigator from './components/headerNavigator';
@@ -20,6 +21,7 @@ const Routes = () => (
         <Route path='/login' component={Login}/>
         <Route path='/tests/tasks' component={Tasks}/> {/*'/tests/tasks'*/}
         <Route path='/tests' component={TestsList}/>
+        <Route path='/admin/groups/students' component={Students}/>
         <Route path='/admin/groups' component={GroupsList}/>
         <Route path='/admin/creation' component={Creator}/> {/*admin/creation*/}
         <Route path='/newQuestion' component={NewQuestion}/>

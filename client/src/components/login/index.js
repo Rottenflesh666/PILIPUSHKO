@@ -43,11 +43,13 @@ export default class login extends React.Component {
       .then((response) => {
         if (response.accessMode === 0) {
           localStorage.setItem('fullName',response.fullName);
+          localStorage.setItem('userId',response.id);
           localStorage.setItem('accessMode', '0');
           this.props.history.push('/tests');
         }
         if(response.accessMode === 1) {
           localStorage.setItem('fullName',response.fullName);
+          localStorage.setItem('userId',response.id);
           localStorage.setItem('accessMode', '1');
           this.props.history.push('/admin/groups');
         }

@@ -12,46 +12,121 @@ import './index.css';
 @observer
 class Tasks extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {isEnd: false};
+  }
+
   @observable messageText = '';
   @observable isEnd = false;
   @observable isResultOpen = false;
-  @observable labelText = 'Неверный запрос';
-  @observable tasks = [
-    {
-      id: '1',
-      task: 'Что означает, например, такое время вылета (прилета) в таблице Trip: "1900-01-01 14:30:00.000"?',
-    },
-    {
-      id: '2',
-      task: 'Что означают ответы "Несовпадение данных", "Неверное число записей" и т.п. при проверке решения?',
-    },
-    {
-      id: '3',
-      task: 'Что такое "стоимость", "эффективность", "план выполнения", "оптимизация" и зачем нам это? ',
-    },
-    {
-      id: '4',
-      task: 'При повторном решении ранее решенного упражнения SELECT появляется кнопка "Записать". Что это? Изменится ли при этом мой рейтинг?',
-    },
-  ];
+  @observable labelText = '';
+  @observable tasks = [];
+  @observable resultStr = '';
+  goodTasks = [];
+
 
   @observable iterator = 0;
 
-  componentWillMount = () => {
-    //Get tests list FETCH('testsList')
+  componentWillMount() {
+    let iterator = localStorage.getItem('iterator');
+    let testStart;
+    let kastyl;
+    let testId = localStorage.getItem('testId');
+    if (iterator === null) {
+      localStorage.setItem('iterator', '0');
+      testStart = true;
+    }
+    else {
+      this.iterator = parseInt(iterator);
+      kastyl = parseInt(iterator) + 1;
+    }
+    fetch('/api/tasks', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: testId,
+      })
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else if (response.status === 404) {
+          console.log('404 : Not found');
+        }
+      })
+      .then((response) => {
+        this.tasks = response.tasks;
 
+        if (testStart) {
+          for (let i = 0; i < this.tasks.length; i++) {
+            this.goodTasks.push(false);
+          }
+        }
+        if (kastyl === response.tasks.length) {
+          this.isEnd = true;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
 
   onTextChange = (event) => {
     this.messageText = event.target.value;
   };
 
-  onNextClickHandler = (e) => {
-    e.preventDefault();
-    this.labelText = '';
-    this.messageText = '';
-    if (!this.isEnd) this.iterator++;
-    if (this.iterator + 1 > this.tasks.length - 1) this.isEnd = true;
+  onNextClickHandler = () => {
+    let userId = localStorage.getItem('userId');
+    if (!this.goodTasks[this.iterator]) {
+      fetch('/tasks/result', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: userId,
+          result: this.messageText,
+          taskId: this.tasks[this.iterator].id,
+        })
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else if (response.status === 404) {
+            console.log('404 : Not found');
+          }
+        })
+        .then((response) => {
+          this.goodTasks[this.iterator] = response.correctly;
+          this.labelText = '';
+          this.messageText = '';
+          if (!this.isEnd) {
+            this.iterator++;
+            localStorage.removeItem('iterator');
+            localStorage.setItem('iterator', `${this.iterator}`);
+          }
+          if (this.iterator + 1 > this.tasks.length - 1) this.isEnd = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
+      this.labelText = '';
+      this.messageText = '';
+      if (!this.isEnd) {
+        this.iterator++;
+        localStorage.removeItem('iterator');
+        localStorage.setItem('iterator', `${this.iterator}`);
+      }
+      if (this.iterator + 1 > this.tasks.length - 1) this.isEnd = true;
+    }
   };
 
   onPrevClickHandler = (e) => {
@@ -60,6 +135,8 @@ class Tasks extends React.Component {
     this.messageText = '';
     this.isEnd = false;
     this.iterator--;
+    localStorage.removeItem('iterator');
+    localStorage.setItem('iterator', `${this.iterator}`);
   };
 
   onCheckClickHandler = (e) => {
@@ -90,15 +167,47 @@ class Tasks extends React.Component {
 
   onEndClickHandler = (e) => {
     e.preventDefault();
-    this.props.history.push('/tests')
+    localStorage.removeItem('iterator');
+    localStorage.removeItem('testId');
+    this.props.history.push('/tests');
   };
 
   onShowResultClickHandler = (e) => {
     e.preventDefault();
-    this.isResultOpen = true;
+    if (!this.goodTasks[this.iterator]) {
+      fetch('/tasks/result', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          testId: this.tasks[this.iterator].id,
+        })
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else if (response.status === 404) {
+            console.log('404 : Not found');
+          }
+        })
+        .then((response) => {
+          this.goodTasks[this.iterator] = response.correctly;
+          let rightCount = 0;
+          for (let i = 0; i < this.tasks.length; i++)
+            if (this.goodTasks[i]) rightCount++;
+          this.resultStr = `Решено правильно ${rightCount} заданий из ${this.tasks.length}.`;
+          this.isResultOpen = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   render() {
+    if (this.tasks.length === 0) return (<div>null</div>);
     return (
       <MuiThemeProvider>
         <div>
@@ -106,7 +215,7 @@ class Tasks extends React.Component {
           <div>
             <ConfirmDialog
               title="Результат"
-              message={'Решено правильно ... заданий из ... ?'}
+              message={this.resultStr}
               onConfirm={this.onEndClickHandler}
               open={this.isResultOpen}
             />
@@ -133,7 +242,8 @@ class Tasks extends React.Component {
                   </Button>
                 </div>
                 <div className="display-inline ">
-                  <TextArea disabled={true} className='labelText' resize={'none'} value={this.labelText}/>
+                <TextArea disabled={true} className='labelText' resize={'none'}
+                          value={this.labelText}/>
                 </div>
                 <div className="display-inline button-left ">
                   <Button className="width100 h-100 button"

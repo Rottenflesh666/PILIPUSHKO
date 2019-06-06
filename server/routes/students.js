@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  app.post('/api/tasks', (req, res) => { //body.id - test id
+  app.post('/api/students', (req, res) => {
     let tasks = [
       {
         id: '1',
@@ -21,20 +21,5 @@ module.exports = (app) => {
     res.status(200).json({
       tasks,
     })
-  });
-
-  app.post('/api/tasks/check', (req, res) => {
-    res.status(200);
-  });
-
-  /*body:
-    userId
-    result
-    taskId*/
-  app.post('/tasks/result', (req, res) => {
-
-    res.status(200).json({
-      correctly:true,
-    });
   });
 };

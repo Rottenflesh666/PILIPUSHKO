@@ -15,7 +15,13 @@ module.exports = (app) => {
     })
   });
 
-  app.post('/groups/students', (req, res) => {
+  app.post('/groups/student/result', (req, res) => { //body:
+    res.status(200).json({
+      students,
+    })
+  });
+
+  app.post('/groups/students', (req, res) => { //body: groupId
     let students = [
       {
         id: '1',
