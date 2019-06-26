@@ -24,7 +24,7 @@ module.exports = (app) => {
   });
 
   app.post('/api/tasks/check', (req, res) => {
-    res.status(200);
+    res.status(200).json({});
   });
 
   /*body:

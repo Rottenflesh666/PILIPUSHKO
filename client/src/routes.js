@@ -8,9 +8,11 @@ import Tasks from './components/tasks';
 import GroupsList from  './components/groups-list';
 import Admin from './components/admin';
 import Students from './components/students';
-import Creator from './components/creator'
+import Creator from './components/creator';
+import AdminTestsList from './components/admin-tests-list';
 import NewQuestion from './components/newQuestion';
 import HeaderNavigator from './components/headerNavigator';
+import BaseMap from './components/base-map';
 
 //'/tests/tasks'
 const Routes = () => (
@@ -21,9 +23,11 @@ const Routes = () => (
         <Route path='/login' component={Login}/>
         <Route path='/tests/tasks' component={Tasks}/> {/*'/tests/tasks'*/}
         <Route path='/tests' component={TestsList}/>
-        <Route path='/admin/groups/students' component={Students}/>
+        <Route path='/admin/groups/students' component={Students}/> {/*/admin/groups/students*/}
         <Route path='/admin/groups' component={GroupsList}/>
-        <Route path='/admin/creation' component={Creator}/> {/*admin/creation*/}
+        <Route path='/admin/tests/:id/map' component={BaseMap}/> {/*'/admin/tests/:id/map'*/}
+        <Route path='/admin/tests/:id' component={Creator}/> {/*'/admin/tests/:id'*/}
+        <Route path='/admin/tests' component={AdminTestsList}/>
         <Route path='/newQuestion' component={NewQuestion}/>
         <Route path='/admin' component={Admin}/>
       </Switch>

@@ -15,12 +15,24 @@ export default class Creator extends React.Component {
   @observable tasks = [];
 
   @observable taskName = '';
+  @observable isEditOn = false;
+  @observable txtAreaDisabled = true;
+  @observable taskValue = '';
 
   selectedTasks = [];
   newTest = {
     test: '',
     tasks: [],
   };
+
+  @observable
+  compState = {
+    selected: null,
+    selectedTaskID: null,
+    selectedTaskName: null,
+    selectedTaskValue: null,
+  };
+
 
   componentWillMount = () => {
     fetch('/admin/tasks', {
@@ -47,46 +59,37 @@ export default class Creator extends React.Component {
 
 
   onCreateHandler = () => {
-    for (let i = 0; i < this.selectedTasks.length; i++) {
-      this.newTest.tasks.push(this.tasks[this.selectedTasks[i]]);
-    }
-    this.newTest.tasks = this.taskName;
-    fetch('/admin/create', {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.newTest),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert('Success');
-        } else if (response.status === 404) {
-          console.log('404 : Not found');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.props.history.push(`${this.props.match.path}/map`);
   };
 
   onCreateTaskHandler = () => {
     this.props.history.push('/newQuestion')
   };
 
-  onClickListItemHandle = (index) => {
-    for (let i = 0; i < this.selectedTasks.length; i++) {
-      if (index === this.selectedTasks[i]) {
-        this.selectedTasks.splice(i, i);
-        return;
-      }
-    }
-    this.selectedTasks.push(index);
+  onClickListItemHandle = (task, index) => {
+    this.compState = ({
+      selected: index,
+      selectedTaskID: task.id,
+      selectedTaskName: task.task,
+      selectedTaskValue: task.value,
+    });
+    this.taskName = task.task;
+    this.taskValue = task.value;
+    this.txtAreaDisabled = false;
   };
+
 
   handleTxtAreaChange = (e) => {
     this.taskName = e.target.value;
+  };
+
+  onEditClickHandler = () => {
+    this.isEditOn = !this.isEditOn;
+    if (!this.txtAreaDisabled) this.txtAreaDisabled = !this.txtAreaDisabled;
+  };
+
+  handleTaskValueChange = (e) =>{
+    this.taskValue = e.target.value;
   };
 
   showTasksList = () => {
@@ -94,10 +97,9 @@ export default class Creator extends React.Component {
       return (
         <ListGroup className="list">
           {this.tasks.map((task, index) => (
-            <ListGroupItem className="list-item  list-group-item.active  text-left" tag="button">
+            <ListGroupItem className="list-item  list-group-item.active  text-left" tag="button"
+                           onClick={() => this.onClickListItemHandle(task, index)}>
               {task.task}
-              <input type="checkbox" className="checkBox"
-                     onChange={() => this.onClickListItemHandle(index)}/>
             </ListGroupItem>
           ))}
         </ListGroup>
@@ -126,19 +128,47 @@ export default class Creator extends React.Component {
                   {/*Название теста:*/}
                 </div>
               </div>
-              <div className="tasksListBody">
+              <div
+                className={this.isEditOn ? "tasksListBodyActiveModify" : "tasksListBodyDisabledModify"}>
                 {this.showTasksList()}
               </div>
-              <div className="textAreaCreator1">
+              <div className={this.isEditOn ? "" : "hideDisabledPart"}>
+
+              </div>
+              <div className={this.isEditOn ? "rightPartCreator" : "disabledPart"}>
+                <div
+                  className="textAreaCreatorActiveModify">
                <TextArea autoHeight value={this.taskName} onChange={this.handleTxtAreaChange}
-                         className="message-input msgCreator" rows={1}
+                         className={this.isEditOn ? "message-input msgCreator max-height100" : ""}
+                         rows={1}
+                         disabled={this.txtAreaDisabled}
                          required/>
+                </div>
+                <div className="rightPartBottom">
+                  <div className="markLabelDiv">
+                    <div>Баллы:</div>
+                  </div>
+                  <div className="markInputDiv">
+                    <TextArea  value={this.taskValue}
+                               disabled={this.txtAreaDisabled}
+                               onChange={this.handleTaskValueChange}
+                               className="markInput"/>
+                  </div>
+                  <Button className="btnSaveEditedQuestion">Сохранить</Button>
+                </div>
               </div>
               <div className="footer bg-primary h-45px">
-                <div className="display-inline button-right ">
-                  <Button className="width100 h-100 button"
-                          onClick={this.onCreateHandler}> {'Создать тест'}
-                  </Button>
+                <div className="rightButtonsContainer">
+                  <div className="display-inline button-right ">
+                    <Button className="width100 h-100 button"
+                            onClick={this.onCreateHandler}> {'Карта базы'}
+                    </Button>
+                  </div>
+                  <div className="display-inline button-right2">
+                    <Button className="width100 h-100 button"
+                            onClick={this.onEditClickHandler}> {this.isEditOn ? 'Отключить' : 'Редактировать'}
+                    </Button>
+                  </div>
                 </div>
                 <div className="display-inline button-left ">
                   <Button className="width120 h-100 button"

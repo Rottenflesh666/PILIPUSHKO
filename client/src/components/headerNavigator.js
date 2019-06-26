@@ -85,8 +85,7 @@ export default class HeaderNavigation extends React.Component {
               right
               width='20%' height="100%" isOpen={this.menuOpen}>
           {this.buildMenuItem(1, "/admin/groups", iconGroup, "Список групп")}
-          {this.buildMenuItem(2, "/admin/creation", iconTest, "Добавить тесты")}
-          {this.buildMenuItem(3, "/newQuestion", iconAdd, "Добавить вопросы")}
+          {this.buildMenuItem(2, "/admin/tests", iconTest, "Тесты")}
           {this.buildMenuItem(99, "/login", iconLogout, "Выход")}
         </Menu>
       </div>

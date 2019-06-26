@@ -1,0 +1,59 @@
+.imgPreview {
+    text-align: center;
+    height: 80%;
+    width: 100%;
+    border-top: 5px solid gray;
+    border-bottom: 5px solid gray;
+}
+
+.img {
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    height: 100%;
+}
+
+.fileInput {
+    text-align: center;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.fileInput + label {
+    text-align: center;
+    font-size: 1rem;;
+    font-weight: 700;
+    color: #000000;
+    background-color: rgb(255, 129, 0);
+    display: inline-block;
+}
+
+.fileInput + label:active{
+    background-color: rgb(165, 96, 0) !important;
+}
+
+.fileInput:focus + label,
+.fileInput + label:hover {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.lblTxt{
+    top: 10%;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.btnRight228{
+    position: absolute;
+    right: 2%;
+    top: 2px;
+    height: 33px;
+    border-radius: 10px;
+}

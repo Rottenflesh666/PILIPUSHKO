@@ -1,7 +1,7 @@
 .task-back-body{
     position: absolute;
     max-width: 1058px;
-    min-width: 680px;
+    min-width: 780px;
     left: 20%;
     right: 20%;
     top: 20%;
@@ -37,7 +37,7 @@
 
 .button-right2{
     position: absolute;
-    right: 20%;
+    right: 180px;
 }
 
 .button{
@@ -68,7 +68,7 @@
 
 .message-input {
     position: absolute;
-    font-size: 3vh;
+    font-size: 2vh;
     min-height: 50px;
     grid-column: 1;
     grid-row: 1;
@@ -105,7 +105,7 @@
 
 .labelText{
     position: absolute;
-    right: 40%;
+    right: 489px;
     color: white;
     background: rgba(0,0,0,0);
     resize: none;
@@ -115,4 +115,9 @@
 
 .labelText:focus{
     outline: none;
+}
+
+.button-right3{
+    position: absolute;
+    right: 320px;
 }

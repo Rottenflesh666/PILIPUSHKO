@@ -5,7 +5,7 @@
     height: 21px;
 }
 
-.tasksListBody{
+.tasksListBodyActiveModify{
     position: absolute;
     width: 40%;
     height: 75%;
@@ -14,11 +14,21 @@
     border-bottom: 2px solid rgba(65, 65, 65, 0.85);
 }
 
-.textAreaCreator1{
+.tasksListBodyDisabledModify{
     position: absolute;
-    height: 70%;
-    width: 60%;
-    left: 40%;
+    width: 100%;
+    height: 75%;
+    border-top: 2px solid rgba(65, 65, 65, 0.85);
+    border-right: 2px solid rgba(65, 65, 65, 0.85);
+    border-bottom: 2px solid rgba(65, 65, 65, 0.85);
+    z-index: 2;
+}
+
+
+.textAreaCreatorActiveModify{
+    position: absolute;
+    height: 88%;
+    width: 100%;
 }
 
 .msgCreator{
@@ -27,4 +37,70 @@
 
 .width120{
     width: 120%;
+}
+
+.rightButtonsContainer{
+    position: absolute;
+    right: 0;
+    width: 620px;
+}
+
+.rightPartCreator{
+    position: absolute;
+    height: 70%;
+    width: 60%;
+    left: 40%;
+}
+
+.btnSaveEditedQuestion{
+    position: absolute;
+    display: inline-block;
+    bottom: 6px;
+    right: 0;
+    width: 30%;
+}
+
+.rightPartBottom{
+    bottom: 0;
+    width: 95%;
+    position: absolute;
+}
+
+.markLabelDiv{
+    position: absolute;
+    display: inline-block;
+    right: 45%;
+    bottom: 15px;
+}
+
+.markInputDiv{
+    position: absolute;
+    display: inline-block;
+    width: 10%;
+    height: 30px;
+    bottom: 13px;
+    right: 35%;
+}
+
+.markInput{
+    width: 100%;
+    height: 100%;
+}
+
+.disabledPart{
+    z-index: -1;
+    height: 0;
+}
+
+.max-height100{
+    max-height: 100%!important;
+    height: 100%;
+}
+
+.hideDisabledPart{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    background: #ececec;
+    z-index: 1;
 }

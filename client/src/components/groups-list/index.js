@@ -1,7 +1,6 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
 import {ListGroup, ListGroupItem} from 'reactstrap';
-import decode from "jwt-decode";
 import {observable} from "mobx";
 import back from '../../images/adminBack.jpg';
 import './index.css';

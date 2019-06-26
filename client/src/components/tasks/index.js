@@ -6,6 +6,8 @@ import {Button} from 'reactstrap';
 import ConfirmDialog from '../stateless-comp/confirm-dialog';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import back from '../../images/notepad_coffe.jpg';
+import ModalWindow from '../stateless-comp/modal';
+
 import './index.css';
 
 @inject("testsStore")
@@ -147,7 +149,9 @@ class Tasks extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.messageText),
+      body: JSON.stringify({
+        answer: this.messageText,
+      })
     })
       .then((response) => {
         if (response.status === 200) {
@@ -209,6 +213,7 @@ class Tasks extends React.Component {
   render() {
     if (this.tasks.length === 0) return (<div>null</div>);
     return (
+
       <MuiThemeProvider>
         <div>
           <img src={back} className="back-image"/>
@@ -229,6 +234,8 @@ class Tasks extends React.Component {
               <TextArea className="message-input" rows={1}
                         value={this.messageText} onChange={this.onTextChange} required/>
               </div>
+
+
               <div className="footer bg-primary h-45px">
                 <div className="display-inline button-right">
                   <Button className="width100 h-100 button"
@@ -241,9 +248,12 @@ class Tasks extends React.Component {
                           onClick={this.onCheckClickHandler}> {'Проверить'}
                   </Button>
                 </div>
+                <div className="display-inline button-right3">
+                  <ModalWindow />
+                </div>
                 <div className="display-inline ">
-                <TextArea disabled={true} className='labelText' resize={'none'}
-                          value={this.labelText}/>
+                  <TextArea disabled={true} className='labelText' resize={'none'}
+                            value={this.labelText}/>
                 </div>
                 <div className="display-inline button-left ">
                   <Button className="width100 h-100 button"
@@ -255,7 +265,9 @@ class Tasks extends React.Component {
             </div>
           </div>
         </div>
+
       </MuiThemeProvider>
+
     )
   }
 }
